@@ -66,16 +66,9 @@ export const ResultsView = () => {
     >
       <div className="flex items-start md:items-center justify-between mb-10 w-full gap-4">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight">Результаты</h2>
-          <p className="text-white/40 text-xs font-bold uppercase tracking-widest mt-1">Просмотр завершенного отчета</p>
+          <h2 className="text-2xl md:text-3xl font-bold tracking-tight">Результаты</h2>
+          <p className="text-white/40 text-[10px] md:text-xs font-bold uppercase tracking-widest mt-1">Просмотр завершенного отчета</p>
         </div>
-        <button 
-          onClick={() => navigate('/', { replace: true })} 
-          className="w-12 h-12 glass-button flex items-center justify-center text-white/60 hover:text-[#00f2ff] transition-all shrink-0"
-          title="Вернуться в дашборд"
-        >
-          <X className="w-5 h-5" />
-        </button>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
@@ -163,13 +156,15 @@ export const ResultsView = () => {
             </div>
           )}
 
-          <button 
-            onClick={() => navigate('/', { replace: true })}
-            className="w-full py-4 glass-button-primary flex items-center justify-center gap-3"
-          >
-            <LayoutDashboard className="w-5 h-5" />
-            <span>Закрыть и вернуться</span>
-          </button>
+          <div className="sticky bottom-6 z-50 mt-10">
+            <button 
+              onClick={() => navigate('/', { replace: true })}
+              className="w-full py-4 glass-button-primary bg-[#00f2ff]/20 backdrop-blur-xl border border-[#00f2ff]/40 flex items-center justify-center gap-3 shadow-[0_0_30px_rgba(0,242,255,0.15)] hover:shadow-[0_0_40px_rgba(0,242,255,0.3)] transition-all"
+            >
+              <LayoutDashboard className="w-5 h-5 text-[#00f2ff]" />
+              <span className="font-bold text-white">Завершить и вернуться</span>
+            </button>
+          </div>
         </div>
 
         <div className="glass-card p-10 flex flex-col items-center justify-center relative overflow-hidden">

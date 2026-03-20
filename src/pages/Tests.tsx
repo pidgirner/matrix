@@ -145,8 +145,8 @@ export const Tests = () => {
                     {ICON_MAP[activeCategoryPopup.icon_name] || <Code2 className="w-6 h-6" />}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h2 className="text-xl md:text-2xl font-bold tracking-tight break-words whitespace-normal leading-tight">{activeCategoryPopup.name}</h2>
-                    <p className="text-white/30 text-[10px] uppercase font-bold tracking-widest mt-1 break-words whitespace-normal leading-relaxed">Выберите модуль диагностики</p>
+                    <h2 className="text-lg md:text-xl font-bold tracking-tight break-words whitespace-normal leading-tight">{activeCategoryPopup.name}</h2>
+                    <p className="text-white/30 text-[10px] uppercase font-bold tracking-widest mt-1 break-words whitespace-normal leading-relaxed">Выберите тест</p>
                   </div>
                 </div>
                 <button 
@@ -166,8 +166,8 @@ export const Tests = () => {
                   const attemptsCount = topicResults.length;
                   const bestScore = topicResults.length > 0 
                     ? Math.max(...topicResults.map(r => {
-                      const values = Object.values(r.scores);
-                      return values.length > 0 ? values.reduce((a, b) => Number(a) + Number(b), 0) / values.length : 0;
+                      const values = Object.values(r.scores) as number[];
+                      return values.length > 0 ? values.reduce((a, b) => a + b, 0) / values.length : 0;
                       }))
                     : null;
 
