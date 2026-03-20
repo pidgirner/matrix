@@ -10,15 +10,22 @@ import { TestResult } from '@/types';
 
 export const Profile = () => {
   const { profile, userResults: results } = useAuth();
-  const { customTests } = useApp();
+  const { customTests, showModal } = useApp();
   const navigate = useNavigate();
   const [expandedTopics, setExpandedTopics] = useState<string[]>([]);
 
   if (!profile) return null;
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    navigate('/login');
+  const handleLogout = () => {
+    showModal(
+      'Выход из аккаунта',
+      'Вы действительно хотите выйти из нейросети?',
+      'confirm',
+      async () => {
+        await supabase.auth.signOut();
+        navigate('/login');
+      }
+    );
   };
 
   const toggleTopic = (topic: string) => {

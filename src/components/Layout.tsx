@@ -46,14 +46,16 @@ export const Layout = () => {
             <button
               key={item.id}
               onClick={() => navigate(item.path)}
-              className={`flex flex-col items-center gap-0.5 transition-all duration-300 ${
+              className={`flex flex-col items-center gap-1 transition-all duration-300 group relative ${
                 isActive ? 'text-[#00e5ff]' : 'text-white/40 hover:text-white/70'
               }`}
             >
-              <div className="p-1 transition-all duration-300">
-                <item.icon className={`w-5 h-5 ${isActive ? 'drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]' : ''}`} />
+              <div className={`p-1 transition-transform duration-300 ${isActive ? '-translate-y-1' : 'group-hover:-translate-y-0.5'}`}>
+                <item.icon className={`w-5 h-5 transition-all duration-300 ${isActive ? 'drop-shadow-[0_0_8px_rgba(0,229,255,0.5)] scale-110' : 'scale-100'}`} />
               </div>
-              <span className="text-[9px] font-normal uppercase tracking-wider">{item.label}</span>
+              <span className={`text-[9px] font-bold uppercase tracking-wider transition-all duration-300 ${isActive ? 'opacity-100' : 'opacity-80'}`}>
+                {item.label}
+              </span>
             </button>
           );
         })}
