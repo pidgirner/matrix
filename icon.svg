@@ -1,0 +1,46 @@
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" class="w-full h-full overflow-visible">
+  <defs>
+    <style>
+      @keyframes pulse-ring {
+        0%   { r: 16px; opacity: 0.7; }
+        100% { r: 32px; opacity: 0; }
+      }
+      .pulse-ring {
+        animation: pulse-ring 2.4s ease-out infinite;
+        transform-origin: 200px 200px;
+      }
+      @keyframes spin {
+        from { transform: rotate(0deg); }
+        to   { transform: rotate(360deg); }
+      }
+      .spin-ring { transform-origin: 200px 200px; animation: spin 24s linear infinite; }
+      .spin-arc  { transform-origin: 200px 200px; animation: spin 12s linear infinite reverse; }
+    </style>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <radialGradient id="center-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stopColor="#00e5ff" stop-opacity="0.10"/>
+      <stop offset="100%" stopColor="#00e5ff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  
+  <circle cx="200" cy="200" r="150" fill="url(#center-glow)"/>
+  
+  <g class="spin-ring">
+    <circle cx="200" cy="200" r="140" fill="none" stroke="#00e5ff" stroke-width="0.5" stroke-dasharray="4 12" opacity="0.2"/>
+    <circle cx="200" cy="200" r="120" fill="none" stroke="#00e5ff" stroke-width="1" stroke-dasharray="80 160" opacity="0.3"/>
+  </g>
+  
+  <g class="spin-arc">
+    <path d="M 200,80 A 120,120 0 0,1 320,200" fill="none" stroke="#00e5ff" stroke-width="2.5" stroke-linecap="round" filter="url(#glow)"/>
+    <path d="M 200,320 A 120,120 0 0,1 80,200" fill="none" stroke="#00e5ff" stroke-width="2.5" stroke-linecap="round" filter="url(#glow)"/>
+  </g>
+  
+  <circle cx="200" cy="200" r="16" class="pulse-ring" fill="none" stroke="#00e5ff" stroke-width="1"/>
+  <circle cx="200" cy="200" r="16" fill="#0d1a24" stroke="#00e5ff" stroke-width="1.8" opacity="0.9" filter="url(#glow)"/>
+  <circle cx="200" cy="200" r="5" fill="#00e5ff" filter="url(#glow)">
+    <animate attributeName="opacity" values="1;0.4;1" dur="2s" repeatCount="indefinite" />
+  </circle>
+</svg>

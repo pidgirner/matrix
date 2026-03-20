@@ -1,0 +1,5 @@
+{
+  "name": "MATRIX",
+  "description": "A comprehensive competency matrix for employees to track skills, take tests, and visualize results with radar charts. Curators can monitor progress across the organization.",
+  "requestFramePermissions": []
+}
