@@ -157,9 +157,9 @@ export const Matrix = () => {
       }
       
       // Calculate average score for this specific test result
-      const scoreValues = Object.values(res.scores || {});
+      const scoreValues = Object.values(res.scores || {}) as number[];
       const avgScore = scoreValues.length > 0 
-        ? scoreValues.reduce((a, b) => Number(a) + Number(b), 0) / scoreValues.length 
+        ? scoreValues.reduce((a, b) => a + b, 0) / scoreValues.length 
         : 0;
 
       userTopicData[res.user_id][res.topic] = {
@@ -250,8 +250,8 @@ export const Matrix = () => {
     >
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
-          <h2 className="text-4xl font-bold tracking-tight mb-2">Матрица <span className="text-[#00f2ff]">Компетенций</span></h2>
-          <p className="text-white/40 text-sm font-medium uppercase tracking-widest">Сводная таблица результатов тестирования</p>
+          <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-2">Матрица <span className="text-[#00f2ff]">Компетенций</span></h2>
+          <p className="text-white/40 text-[10px] md:text-xs font-bold uppercase tracking-widest mt-1">Сводная таблица результатов тестирования</p>
         </div>
         <button
           onClick={handleExportXLSX}
@@ -463,7 +463,7 @@ export const Matrix = () => {
                      {selectedHistory.loading ? <Loader2 className="w-6 h-6 animate-spin" /> : <Clock className="w-6 h-6" />}
                   </div>
                   <div>
-                    <h2 className="text-2xl font-bold tracking-tight">История попыток</h2>
+                    <h2 className="text-xl md:text-2xl font-bold tracking-tight">История попыток</h2>
                     <p className="text-white/30 text-[10px] uppercase font-bold tracking-[0.2em] mt-1">
                       {selectedHistory.userName} — {selectedHistory.topic}
                     </p>
@@ -479,9 +479,9 @@ export const Matrix = () => {
 
               <div className="flex-1 overflow-y-auto custom-scrollbar pr-2 space-y-4">
                 {selectedHistory.attempts.map((attempt, idx) => {
-                  const scoreValues = Object.values(attempt.scores || {});
+                  const scoreValues = Object.values(attempt.scores || {}) as number[];
                   const avgScore = scoreValues.length > 0 
-                    ? Math.round(scoreValues.reduce((a, b) => Number(a) + Number(b), 0) / scoreValues.length)
+                    ? Math.round(scoreValues.reduce((a, b) => a + b, 0) / scoreValues.length)
                     : 0;
 
                   return (

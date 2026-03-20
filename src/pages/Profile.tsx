@@ -65,7 +65,7 @@ export const Profile = () => {
             <User className="w-16 h-16 text-[#00f2ff]" />
           </div>
           <div className="text-center md:text-left flex-1">
-            <h2 className="text-4xl font-bold tracking-tight mb-2">
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-2">
               {profile.last_name} <span className="text-[#00f2ff]">{profile.first_name}</span>
             </h2>
             <div className="flex flex-wrap justify-center md:justify-start gap-4">

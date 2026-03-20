@@ -57,7 +57,7 @@ export const Dashboard = () => {
 
     const avgScore = Math.round(
       filteredResults.reduce((acc, r) => {
-        const scores = Object.values(r.scores);
+        const scores = Object.values(r.scores) as number[];
         return acc + (scores.reduce((a, b) => a + b, 0) / scores.length);
       }, 0) / filteredResults.length
     );
@@ -82,7 +82,7 @@ export const Dashboard = () => {
       const avg = catResults.length > 0
         ? Math.round(
             catResults.reduce((acc, r) => {
-              const scores = Object.values(r.scores);
+              const scores = Object.values(r.scores) as number[];
               return acc + (scores.reduce((a, b) => a + b, 0) / scores.length);
             }, 0) / catResults.length
           )
@@ -104,7 +104,7 @@ export const Dashboard = () => {
       .reverse()
       .map(r => ({
         date: new Date(r.created_at).toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' }),
-        score: Math.round(Object.values(r.scores).reduce((a, b) => a + b, 0) / Object.values(r.scores).length)
+        score: Math.round((Object.values(r.scores) as number[]).reduce((a, b) => a + b, 0) / Object.values(r.scores).length)
       }));
   }, [results, customTests]);
 
@@ -116,7 +116,7 @@ export const Dashboard = () => {
         return test?.include_in_average !== false;
       })
       .forEach(r => {
-        const avg = Object.values(r.scores).reduce((a, b) => a + b, 0) / Object.values(r.scores).length;
+        const avg = (Object.values(r.scores) as number[]).reduce((a, b) => a + b, 0) / Object.values(r.scores).length;
         if (!topics[r.topic] || avg > topics[r.topic].score) {
           topics[r.topic] = { score: Math.round(avg), count: (topics[r.topic]?.count || 0) + 1 };
         }
@@ -157,8 +157,8 @@ export const Dashboard = () => {
     >
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
-          <h2 className="text-4xl font-bold tracking-tight mb-2">Личный <span className="text-[#00f2ff]">Дашборд</span></h2>
-          <p className="text-white/40 text-sm font-medium uppercase tracking-widest">Анализ ваших компетенций и прогресса</p>
+          <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-2">Личный <span className="text-[#00f2ff]">Дашборд</span></h2>
+          <p className="text-white/40 text-[10px] md:text-xs font-bold uppercase tracking-widest mt-1">Анализ ваших компетенций и прогресса</p>
         </div>
       </div>
 

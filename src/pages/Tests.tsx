@@ -64,9 +64,9 @@ export const Tests = () => {
       exit={{ opacity: 0, y: -20 }}
       className="max-w-5xl mx-auto p-4 md:p-8"
     >
-      <div className="text-center mb-16">
-        <h2 className="text-5xl font-bold tracking-tight mb-4">Узлы <span className="text-[#00e5ff]">Навыков</span></h2>
-        <p className="text-white/40 text-lg">Выберите категорию для начала тестирования / оценки</p>
+      <div className="text-center mb-10 md:mb-16">
+        <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-2">Узлы <span className="text-[#00e5ff]">Навыков</span></h2>
+        <p className="text-white/40 text-[10px] md:text-xs font-bold uppercase tracking-widest mt-1">Выберите категорию для начала тестирования / оценки</p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
