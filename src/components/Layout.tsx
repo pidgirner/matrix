@@ -62,7 +62,7 @@ export const Layout = () => {
       </nav>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-y-auto relative z-10 pb-20">
+      <main className="flex-1 overflow-y-auto relative z-10 pt-safe pb-20">
         <Outlet />
       </main>
     </div>

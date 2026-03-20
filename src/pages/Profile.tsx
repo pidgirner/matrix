@@ -43,8 +43,7 @@ export const Profile = () => {
           const test = customTests.find(t => t.topic === r.topic);
           return test?.include_in_average !== false;
         });
-        if (filteredResults.length === 0) return '0%';
-        const avg = Math.round(filteredResults.reduce((acc, r) => acc + (Object.values(r.scores).reduce((a, b) => Number(a) + Number(b), 0) as number) / Object.values(r.scores).length, 0) / filteredResults.length);
+        const avg = Math.round(filteredResults.reduce((acc, r) => acc + ((Object.values(r.scores) as number[]).reduce((a, b) => a + b, 0)) / Object.values(r.scores).length, 0) / filteredResults.length);
         return `${avg}%`;
       })(), 
       icon: TrendingUp, 
@@ -149,12 +148,15 @@ export const Profile = () => {
             ).map(([topic, topicResults]) => {
               const latest = topicResults[0];
               const best = [...topicResults].sort((a, b) => {
-                const scoreA = Object.values(a.scores).reduce((sum, s) => sum + s, 0) / Object.values(a.scores).length;
-                const scoreB = Object.values(b.scores).reduce((sum, s) => sum + s, 0) / Object.values(b.scores).length;
+                const valsA = Object.values(a.scores) as number[];
+                const valsB = Object.values(b.scores) as number[];
+                const scoreA = valsA.length ? valsA.reduce((sum, s) => sum + s, 0) / valsA.length : 0;
+                const scoreB = valsB.length ? valsB.reduce((sum, s) => sum + s, 0) / valsB.length : 0;
                 return scoreB - scoreA;
               })[0];
               
-              const bestScore = Math.round(Object.values(best.scores).reduce((sum, s) => sum + s, 0) / Object.values(best.scores).length);
+              const bestVals = Object.values(best.scores) as number[];
+              const bestScore = bestVals.length ? Math.round(bestVals.reduce((sum, s) => sum + s, 0) / bestVals.length) : 0;
               const isExpanded = expandedTopics.includes(topic);
 
               return (
@@ -191,7 +193,8 @@ export const Profile = () => {
                         className="border-t border-white/5 bg-black/20"
                       >
                         {topicResults.map((res, idx) => {
-                          const avg = Math.round(Object.values(res.scores).reduce((sum, s) => sum + s, 0) / Object.values(res.scores).length);
+                          const rVals = Object.values(res.scores) as number[];
+                          const avg = rVals.length ? Math.round(rVals.reduce((sum, s) => sum + s, 0) / rVals.length) : 0;
                           return (
                             <div 
                               key={res.id}
