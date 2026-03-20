@@ -136,7 +136,7 @@ export const Profile = () => {
         <div className="glass-card p-6 space-y-6">
           <h3 className="text-xs uppercase font-bold tracking-[0.2em] text-[#00f2ff] flex items-center gap-2">
             <Award className="w-4 h-4" />
-            История диагностик
+            История Тестов
           </h3>
           <div className="space-y-3 max-h-[400px] overflow-y-auto custom-scrollbar pr-2">
             {Object.entries(
@@ -160,7 +160,7 @@ export const Profile = () => {
               const isExpanded = expandedTopics.includes(topic);
 
               return (
-                <div key={topic} className="glass-card bg-white/5 border-white/5 overflow-hidden">
+                <div key={topic} className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden">
                   <div 
                     onClick={() => toggleTopic(topic)}
                     className="p-3 flex items-center justify-between cursor-pointer hover:bg-white/5 transition-colors"
