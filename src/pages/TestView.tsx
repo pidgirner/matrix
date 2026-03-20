@@ -287,7 +287,7 @@ export const TestView = () => {
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="flex flex-col items-center gap-4">
           <Loader2 className="w-12 h-12 text-[#00e5ff] animate-spin" />
-          <p className="text-white/60 font-mono text-sm uppercase tracking-widest">Генерация нейронных связей...</p>
+          <p className="text-white/60 text-sm uppercase tracking-widest">Генерация нейронных связей...</p>
         </div>
       </div>
     );
@@ -391,7 +391,7 @@ export const TestView = () => {
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="flex flex-col items-center gap-4">
           <Loader2 className="w-12 h-12 text-[#00e5ff] animate-spin" />
-          <p className="text-white/60 font-mono text-sm uppercase tracking-widest">Генерация нейронных связей...</p>
+          <p className="text-white/60 text-sm uppercase tracking-widest">Генерация нейронных связей...</p>
         </div>
       </div>
     );

@@ -135,29 +135,29 @@ export const Tests = () => {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="glass-card w-full max-w-4xl p-10 relative z-10 overflow-hidden"
+              className="glass-card w-full max-w-4xl p-6 md:p-10 relative z-10 overflow-hidden flex flex-col max-h-[90vh]"
             >
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#00e5ff] to-[#7000ff]" />
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#00e5ff] to-[#7000ff] shrink-0" />
               
-              <div className="flex items-center justify-between mb-10">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 glass-button flex items-center justify-center text-[#00e5ff]">
+              <div className="flex items-start md:items-center justify-between mb-8 shrink-0">
+                <div className="flex items-start md:items-center gap-4 flex-1 min-w-0 pr-4">
+                  <div className="w-12 h-12 glass-button flex items-center justify-center text-[#00e5ff] shrink-0">
                     {ICON_MAP[activeCategoryPopup.icon_name] || <Code2 className="w-6 h-6" />}
                   </div>
-                  <div>
-                    <h2 className="text-3xl font-bold tracking-tight">{activeCategoryPopup.name}</h2>
-                    <p className="text-white/30 text-[10px] uppercase font-bold tracking-[0.2em] mt-1">Выберите модуль диагностики</p>
+                  <div className="flex-1 min-w-0">
+                    <h2 className="text-2xl md:text-3xl font-bold tracking-tight break-words whitespace-normal leading-tight">{activeCategoryPopup.name}</h2>
+                    <p className="text-white/30 text-[10px] uppercase font-bold tracking-widest mt-1 break-words whitespace-normal leading-relaxed">Выберите модуль диагностики</p>
                   </div>
                 </div>
                 <button 
                   onClick={() => setActiveCategoryPopup(null)}
-                  className="w-10 h-10 glass-button flex items-center justify-center text-white/40 hover:text-white transition-colors"
+                  className="w-10 h-10 glass-button flex items-center justify-center text-white/40 hover:text-white transition-colors shrink-0"
                 >
                   <Plus className="w-5 h-5 rotate-45" />
                 </button>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 overflow-y-auto custom-scrollbar pr-2 pb-4">
                 {getFilteredTopics(activeCategoryPopup).map((topic) => {
                   const customTest = customTests.find(t => t.category === activeCategoryPopup.name && t.topic === topic);
                   
@@ -166,8 +166,8 @@ export const Tests = () => {
                   const attemptsCount = topicResults.length;
                   const bestScore = topicResults.length > 0 
                     ? Math.max(...topicResults.map(r => {
-                        const values = Object.values(r.scores);
-                        return values.length > 0 ? values.reduce((a, b) => a + b, 0) / values.length : 0;
+                      const values = Object.values(r.scores);
+                      return values.length > 0 ? values.reduce((a, b) => Number(a) + Number(b), 0) / values.length : 0;
                       }))
                     : null;
 
