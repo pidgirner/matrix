@@ -265,13 +265,30 @@ export const TestView = () => {
     console.log('Saving result with timeout info:', { timedOut, answered: answers.length });
 
     try {
-      const { data, error } = await supabase.from('results').insert([result]).select().single();
-      if (error) throw error;
+      let insertData = { ...result };
+      const { data, error } = await supabase.from('results').insert([insertData]).select().single();
+      
+      if (error) {
+        if (error.message?.includes('could not find the') || error.message?.includes('column')) {
+          delete (insertData as any).total_questions;
+          delete (insertData as any).answered_questions;
+          delete (insertData as any).finished_by_timeout;
+          
+          const retry = await supabase.from('results').insert([insertData]).select().single();
+          if (retry.error) throw retry.error;
+          
+          await refreshUserResults();
+          navigate(`/results/${retry.data.id}`, { state: { result: retry.data }, replace: true });
+          return;
+        }
+        throw error;
+      }
       
       await refreshUserResults();
       navigate(`/results/${data.id}`, { state: { result: data }, replace: true });
     } catch (error) {
       console.error('Error saving result:', error);
+      alert('Ошибка при сохранении результатов. Возможно, нет доступа к базе данных.');
       setLoading(false);
     }
   };
@@ -419,17 +436,11 @@ export const TestView = () => {
 
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 md:mb-12">
           <div>
-            <div className="text-[10px] uppercase font-bold tracking-[0.2em] text-[#00e5ff] mb-2 break-words">
-              Диагностическая последовательность: {topic}
-            </div>
-            <div className="flex items-center gap-3">
-              <h2 className="text-2xl md:text-3xl font-bold tracking-tight">Активная оценка</h2>
-              {isLimitReached && isCurator && (
-                <span className="px-2 py-1 rounded-md bg-yellow-500/10 border border-yellow-500/20 text-[10px] font-bold text-yellow-500 uppercase tracking-wider shrink-0">
-                  Админ-доступ (Лимит)
-                </span>
-              )}
-            </div>
+            {isLimitReached && isCurator && (
+              <span className="px-2 py-1 rounded-md bg-yellow-500/10 border border-yellow-500/20 text-[10px] font-bold text-yellow-500 uppercase tracking-wider shrink-0 mb-2 inline-block">
+                Админ-доступ (Лимит)
+              </span>
+            )}
           </div>
           <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-start w-full md:w-auto gap-4 md:gap-2">
             <div className="glass-button px-4 py-2 text-xs font-mono font-bold text-white/60 whitespace-nowrap">
