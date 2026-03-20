@@ -64,28 +64,28 @@ export const ResultsView = () => {
       animate={{ opacity: 1, y: 0 }}
       className="max-w-5xl mx-auto p-4 md:p-8"
     >
-      <div className="flex items-center gap-6 mb-10">
+      <div className="flex items-start md:items-center justify-between mb-10 w-full gap-4">
+        <div>
+          <h2 className="text-3xl font-bold tracking-tight">Результаты</h2>
+          <p className="text-white/40 text-xs font-bold uppercase tracking-widest mt-1">Просмотр завершенного отчета</p>
+        </div>
         <button 
           onClick={() => navigate('/', { replace: true })} 
-          className="w-12 h-12 glass-button flex items-center justify-center text-white/60 hover:text-[#00f2ff] transition-all"
+          className="w-12 h-12 glass-button flex items-center justify-center text-white/60 hover:text-[#00f2ff] transition-all shrink-0"
           title="Вернуться в дашборд"
         >
           <X className="w-5 h-5" />
         </button>
-        <div>
-          <h2 className="text-3xl font-bold tracking-tight">Результаты <span className="text-[#00f2ff]">Диагностики</span></h2>
-          <p className="text-white/40 text-xs font-bold uppercase tracking-widest mt-1">Просмотр завершенного отчета</p>
-        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         <div className="glass-card p-10">
           <div className="flex items-center gap-4 mb-10">
-            <div className="w-14 h-14 glass-button flex items-center justify-center text-yellow-400 shadow-[0_0_20px_rgba(250,204,21,0.2)]">
-              <Trophy className="w-7 h-7" />
+            <div className="w-12 h-12 md:w-14 md:h-14 glass-button flex items-center justify-center text-yellow-400 shadow-[0_0_20px_rgba(250,204,21,0.2)] shrink-0">
+              <Trophy className="w-6 h-6 md:w-7 md:h-7" />
             </div>
             <div>
-              <h2 className="text-3xl font-bold tracking-tight">Оценка завершена</h2>
+              <h2 className="text-xl md:text-2xl font-bold tracking-tight">Оценка завершена</h2>
             </div>
           </div>
 
@@ -110,7 +110,7 @@ export const ResultsView = () => {
               <div key={skill} className="space-y-2">
                 <div className="flex justify-between text-xs font-bold tracking-wider uppercase">
                   <span className="text-white/60">{skill}</span>
-                  <span className="font-mono text-[#00e5ff]">{Math.round(score)}%</span>
+                  <span className="font-mono text-[#00e5ff]">{Math.round(Number(score))}%</span>
                 </div>
                 <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
                   <motion.div 

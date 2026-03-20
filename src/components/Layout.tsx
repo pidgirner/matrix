@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { 
   LayoutDashboard,
@@ -17,6 +17,13 @@ export const Layout = () => {
   const { profile } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const mainRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (mainRef.current) {
+      mainRef.current.scrollTo(0, 0);
+    }
+  }, [location.pathname]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -62,7 +69,7 @@ export const Layout = () => {
       </nav>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-y-auto relative z-10 pt-safe pb-20">
+      <main ref={mainRef} className="flex-1 overflow-y-auto relative z-10 pt-safe pb-20 scroll-smooth">
         <Outlet />
       </main>
     </div>
