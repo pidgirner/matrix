@@ -287,7 +287,9 @@ export const TestView = () => {
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="flex flex-col items-center gap-4">
           <Loader2 className="w-12 h-12 text-[#00e5ff] animate-spin" />
-          <p className="text-white/60 text-sm uppercase tracking-widest">Генерация нейронных связей...</p>
+          <p className="text-white/60 text-sm uppercase tracking-widest">
+            {currentTest ? 'Сохранение результатов...' : 'Генерация нейронных связей...'}
+          </p>
         </div>
       </div>
     );
@@ -391,7 +393,9 @@ export const TestView = () => {
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="flex flex-col items-center gap-4">
           <Loader2 className="w-12 h-12 text-[#00e5ff] animate-spin" />
-          <p className="text-white/60 text-sm uppercase tracking-widest">Генерация нейронных связей...</p>
+          <p className="text-white/60 text-sm uppercase tracking-widest">
+            {currentTest ? 'Сохранение результатов...' : 'Генерация нейронных связей...'}
+          </p>
         </div>
       </div>
     );
@@ -413,27 +417,27 @@ export const TestView = () => {
           />
         </div>
 
-        <div className="flex items-center justify-between mb-12">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 md:mb-12">
           <div>
-            <div className="text-[10px] uppercase font-bold tracking-[0.2em] text-[#00e5ff] mb-2">
+            <div className="text-[10px] uppercase font-bold tracking-[0.2em] text-[#00e5ff] mb-2 break-words">
               Диагностическая последовательность: {topic}
             </div>
             <div className="flex items-center gap-3">
-              <h2 className="text-3xl font-bold tracking-tight">Активная оценка</h2>
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tight">Активная оценка</h2>
               {isLimitReached && isCurator && (
-                <span className="px-2 py-1 rounded-md bg-yellow-500/10 border border-yellow-500/20 text-[10px] font-bold text-yellow-500 uppercase tracking-wider">
-                  Админ-доступ (Лимит исчерпан)
+                <span className="px-2 py-1 rounded-md bg-yellow-500/10 border border-yellow-500/20 text-[10px] font-bold text-yellow-500 uppercase tracking-wider shrink-0">
+                  Админ-доступ (Лимит)
                 </span>
               )}
             </div>
           </div>
-          <div className="flex flex-col items-end gap-2">
-            <div className="glass-button px-4 py-2 text-xs font-mono font-bold text-white/60">
+          <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-start w-full md:w-auto gap-4 md:gap-2">
+            <div className="glass-button px-4 py-2 text-xs font-mono font-bold text-white/60 whitespace-nowrap">
               {testStep + 1} из {currentTest.length}
             </div>
             {timeLeft !== null && (
               <div className={cn(
-                "px-4 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase border transition-colors",
+                "px-4 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase border transition-colors whitespace-nowrap",
                 timeLeft < 60 ? "text-red-400 border-red-400/30 bg-red-400/10 animate-pulse" : "text-[#00f2ff] border-[#00f2ff]/30 bg-[#00f2ff]/10"
               )}>
                 Осталось: {formatTime(timeLeft)}
@@ -462,7 +466,7 @@ export const TestView = () => {
             </motion.div>
           )}
 
-          <h3 className="text-2xl font-medium leading-relaxed text-white/90 mb-10">
+          <h3 className="text-lg md:text-xl font-medium leading-relaxed text-white/90 mb-8 md:mb-10">
             {currentTest[testStep].question}
           </h3>
           
